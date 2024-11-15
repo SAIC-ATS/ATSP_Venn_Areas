@@ -29,8 +29,7 @@ function setup() {
     area.r = randR[index];
     area.color = randColors[index];
   });
-
-  background(255);
+  background(200);
   renderCourseList();
   renderAreas();
   plotCourseDots();
@@ -38,7 +37,7 @@ function setup() {
 
 function draw() {
   // Clear the background and redraw areas and highlighted circles
-  background(255);
+  background(200);
   renderAreas();
 
   // Draw any highlighted circles from the active course
@@ -129,7 +128,7 @@ function displayDescription(area) {
   const descriptionDiv = createDiv()
     .parent(descriptionBox)
     .addClass(
-      "description p-2 mb-2 shadow-lg rounded bg-gray-100 bg-opacity-75"
+      "description p-2 mb-2 shadow-lg rounded bg-gray-300 bg-opacity-50"
     );
 
   descriptionDiv.html(`<strong>${area.name}</strong>: ${area.description}`);
