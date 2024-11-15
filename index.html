@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Venn Diagram</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="flex justify-center items-center h-screen bg-gray-100">
+    <div id="container" class="grid grid-cols-3 w-full">
+      <div id="course-list" class="p-4 mt-8 overflow-y-auto z-10"></div>
+      <div
+        id="venn-diagram"
+        class="fixed top-0 flex w-full justify-center items-center z-0"
+      ></div>
+      <div
+        id="description-box"
+        class="p-4 w-1/4 top-0 right-0 overflow-y-auto z-10 absolute"
+      ></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="data.js"></script>
+    <script src="venn.js"></script>
+  </body>
+</html>
