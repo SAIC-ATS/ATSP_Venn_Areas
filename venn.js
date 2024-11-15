@@ -21,7 +21,7 @@ function setup() {
       opacity,
     ];
     randR[index] = random(100, 200);
-    randY[index] = random(height * 0.2, height * 0.8);
+    randY[index] = random(height * 0.25, height * 0.8);
     randX[index] = random(width * 0.3, width * 0.7);
 
     area.x = randX[index];
@@ -29,7 +29,6 @@ function setup() {
     area.r = randR[index];
     area.color = randColors[index];
   });
-  background(200);
   renderCourseList();
   renderAreas();
   plotCourseDots();
@@ -37,7 +36,7 @@ function setup() {
 
 function draw() {
   // Clear the background and redraw areas and highlighted circles
-  background(200);
+  background(250);
   renderAreas();
 
   // Draw any highlighted circles from the active course
@@ -47,11 +46,10 @@ function draw() {
     ellipse(area.x, area.y, area.r * 2);
   });
 
-  plotCourseDots();
-
   if (activeCourse) {
     drawConnections();
   }
+  plotCourseDots();
 }
 
 function renderAreas() {
@@ -107,14 +105,6 @@ function highlightTags(tags) {
   });
 }
 
-function highlightCircle(area) {
-  print("highlight: " + area.name);
-  // fill(area.color[0], area.color[1], area.color[2], 250);
-  // stroke(0, 0, 255);
-  // strokeWidth(10);
-  // ellipse(area.x, area.y, area.r * 2);
-}
-
 function clearHighlights() {
   selectAll(".description").forEach((el) => el.remove());
   background(255);
@@ -128,7 +118,7 @@ function displayDescription(area) {
   const descriptionDiv = createDiv()
     .parent(descriptionBox)
     .addClass(
-      "description p-2 mb-2 shadow-lg rounded bg-gray-300 bg-opacity-50"
+      "description p-2 mb-2 shadow-lg rounded bg-slate-50 bg-opacity-50"
     );
 
   descriptionDiv.html(`<strong>${area.name}</strong>: ${area.description}`);
@@ -153,12 +143,14 @@ function plotCourseDots() {
     if (count > 0) {
       avgX /= count;
       avgY /= count;
-
+      r = map(randX[count], width * 0.3, width * 0.7, 10, 155);
+      g = map(randY[count], width * 0.2, width * 0.8, 50, 255);
+      b = map(randR[count], 100, 200, 10, 255);
       // Set dot color based on whether the course is active
       if (activeCourse === course) {
         fill(255, 0, 0); // Red dot for the active course
       } else {
-        fill(0, 0, 0); // Black dot for other courses
+        fill(r, g, b, 50);
       }
 
       noStroke();
@@ -194,13 +186,10 @@ function drawConnections() {
     activeCourse.tags.forEach((tag) => {
       const area = areasOfStudy.find((area) => area.tag === tag);
       if (area) {
-        if (lastCenter) {
-          // Set stroke to the area's color for line between centers
-          stroke(area.color[0], area.color[1], area.color[2], 150);
-          strokeWeight(2);
-          line(lastCenter.x, lastCenter.y, area.x, area.y);
-        }
-        lastCenter = { x: area.x, y: area.y };
+        // Set stroke to the area's color for line between centers
+        stroke(area.color[0] - 50, area.color[1] - 50, area.color[2] - 50, 150);
+        strokeWeight(2);
+        line(activeCourse.avgX, activeCourse.avgY, area.x, area.y);
       }
     });
 

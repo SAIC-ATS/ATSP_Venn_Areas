@@ -9,16 +9,23 @@
       rel="stylesheet"
     />
   </head>
-  <body class="flex justify-center items-center h-screen bg-gray-100">
-    <div id="container" class="grid grid-cols-3 w-full">
-      <div id="course-list" class="p-4 my-4 overflow-y-auto z-10"></div>
+  <body class="justify-center items-center bg-gray-50">
+    <div id="title" class="static z-20 text-4xl text-center">
+      <p>Art & Technology / Sound Practices</p>
+    </div>
+    <div id="container" class="grid grid-cols-4 w-full top-50">
       <div
-        id="venn-diagram"
-        class="fixed top-0 flex w-full justify-center items-center z-0"
+        id="course-list"
+        class="h-screen static overflow-scroll overscroll-contain p-4 my-4 z-10"
       ></div>
       <div
+        id="venn-diagram"
+        class="fixed col-span-2 w-full justify-center items-center z-0"
+      ></div>
+      <div class="col-span-2"></div>
+      <div
         id="description-box"
-        class="p-4 w-1/4 top-0 right-0 overflow-y-auto z-10 absolute"
+        class="h-screen p-4 overflow-scroll overscroll-contain right-0 right-0 z-10 static"
       ></div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
