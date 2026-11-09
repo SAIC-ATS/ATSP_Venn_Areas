@@ -3,34 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Course Venn Diagram</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
+    <title>AT/SP Curriculum Map</title>
+    <meta
+      name="description"
+      content="Courses in Art & Technology / Sound Practices and Art & Technology Studies mapped to their thematic areas."
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="justify-center items-center bg-gray-50">
-    <div id="title" class="static z-20 text-4xl text-center">
-      <p>Art & Technology / Sound Practices</p>
+  <body>
+    <header class="top">
+      <div class="title">
+        <nav id="set-tabs" class="set-tabs" role="tablist" aria-label="Curriculum"></nav>
+        <h1 id="ds-title">Curriculum Map</h1>
+        <p class="sub"><span id="ds-sub"></span> <span id="ds-note" class="note" hidden></span></p>
+      </div>
+      <div class="toggles">
+        <div id="lens-toggle" class="lens-toggle" role="tablist" aria-label="Organize by" hidden></div>
+        <div class="view-toggle" role="tablist" aria-label="View">
+          <button role="tab" data-view="map" aria-selected="true">Map</button>
+          <button role="tab" data-view="matrix" aria-selected="false">Matrix</button>
+        </div>
+      </div>
+    </header>
+
+    <div id="warnings" class="warnings" hidden></div>
+
+    <div class="legend-bar">
+      <div id="legend" class="legend" aria-label="Thematic areas"></div>
+      <div class="legend-tools">
+        <div id="match-toggle" class="match-toggle" data-off>
+          <span>Show courses in</span>
+          <button data-match="all" aria-pressed="true">all</button>
+          <button data-match="any" aria-pressed="false">any</button>
+          <span>selected themes</span>
+        </div>
+        <button id="clear" class="link-btn" data-off>Clear</button>
+      </div>
     </div>
-    <div id="container" class="grid grid-cols-4 w-full top-50">
-      <div
-        id="course-list"
-        class="h-screen static overflow-scroll overscroll-contain p-4 my-4 z-10"
-      ></div>
-      <div
-        id="venn-diagram"
-        class="fixed col-span-2 w-full justify-center items-center z-0"
-      ></div>
-      <div class="col-span-2"></div>
-      <div
-        id="description-box"
-        class="h-screen p-4 overflow-scroll overscroll-contain right-0 right-0 z-10 static"
-      ></div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-    <script src="https://d3js.org/d3.v6.min.js"></script>
-    <script src="data.js"></script>
-    <script src="venn.js"></script>
+
+    <main class="layout">
+      <aside class="courses-panel">
+        <label class="search">
+          <span class="visually-hidden">Search courses</span>
+          <input id="search" type="search" placeholder="Search courses" autocomplete="off" />
+        </label>
+        <p id="course-count" class="count"></p>
+        <ul id="course-list" class="course-list"></ul>
+      </aside>
+
+      <section class="stage" aria-label="Curriculum map">
+        <div id="map" class="map"></div>
+        <div id="matrix" class="matrix" hidden></div>
+      </section>
+
+      <aside id="details" class="details" aria-live="polite"></aside>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+    <!-- Each data file adds one curriculum view; the first one listed is the default. -->
+    <script src="data/atsp.js"></script>
+    <script src="data/atsp-2026-27.js"></script>
+    <script src="data/atsp-old.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
